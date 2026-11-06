@@ -1,16 +1,9 @@
-# TWRP fstab for the VEGA S5 (ef44); same partitions as the TWRP 3.7.0_9
-# image the phone shipped with from the community
-/boot           emmc    /dev/block/platform/msm_sdcc.1/by-name/boot
-/recovery       emmc    /dev/block/platform/msm_sdcc.1/by-name/recovery
-/misc           emmc    /dev/block/platform/msm_sdcc.1/by-name/misc
-/system         ext4    /dev/block/platform/msm_sdcc.1/by-name/system
-/system_image   emmc    /dev/block/platform/msm_sdcc.1/by-name/system
-/cache          ext4    /dev/block/platform/msm_sdcc.1/by-name/cache
-/data           ext4    /dev/block/platform/msm_sdcc.1/by-name/userdata    length=-16384
-/persist        ext4    /dev/block/platform/msm_sdcc.1/by-name/persist     flags=display="Persist";backup=1
-/efs1           emmc    /dev/block/platform/msm_sdcc.1/by-name/modemst1    flags=backup=1;display=EFS
-/efs2           emmc    /dev/block/platform/msm_sdcc.1/by-name/modemst2    flags=backup=1;subpartitionof=/efs1
-/radio          emmc    /dev/block/platform/msm_sdcc.1/by-name/modem       flags=backup=1;display=Modem
-
-/external_sd    vfat    /dev/block/mmcblk1p1    /dev/block/mmcblk1    flags=display="Micro SD";storage;wipeingui;removable
-/usb-otg        auto    /dev/block/sda1         flags=display="USB-OTG";storage;wipeingui;removable
+# VEGA S5 (ef44) recovery fstab in Android fs_mgr format, which init,
+# ueventd and libfs_mgr read; TWRP-only partitions and flags are in twrp.flags
+#<src>                                           <mnt_point>  <type>  <mnt_flags>                               <fs_mgr_flags>
+/dev/block/platform/msm_sdcc.1/by-name/boot      /boot        emmc    defaults                                  defaults
+/dev/block/platform/msm_sdcc.1/by-name/recovery  /recovery    emmc    defaults                                  defaults
+/dev/block/platform/msm_sdcc.1/by-name/misc      /misc        emmc    defaults                                  defaults
+/dev/block/platform/msm_sdcc.1/by-name/system    /system      ext4    ro,barrier=1                              wait
+/dev/block/platform/msm_sdcc.1/by-name/cache     /cache       ext4    nosuid,nodev,barrier=1                    wait
+/dev/block/platform/msm_sdcc.1/by-name/userdata  /data        ext4    nosuid,nodev,barrier=1,noauto_da_alloc    wait,length=-16384

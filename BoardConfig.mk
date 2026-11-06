@@ -33,6 +33,9 @@ BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1468006400
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13136478208
 TARGET_USERIMAGES_USE_EXT4 := true
+# recovery/root/system/etc/mke2fs.conf keeps formatted ext4 mountable by the
+# 3.4 kernel: without it mke2fs 1.45 defaults to metadata_csum (needs 3.18)
+# and Format Data leaves /data and /cache unmountable for TWRP and the ROM
 TARGET_COPY_OUT_VENDOR := vendor
 BOARD_SUPPRESS_SECURE_ERASE := true
 

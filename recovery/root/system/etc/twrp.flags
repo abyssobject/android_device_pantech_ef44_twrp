@@ -1,0 +1,10 @@
+# TWRP-only partitions and flags for the VEGA S5 (ef44), on top of
+# recovery.fstab; same set as the TWRP 3.7.0_9 image for this phone
+/system_image   emmc    /dev/block/platform/msm_sdcc.1/by-name/system
+/persist        ext4    /dev/block/platform/msm_sdcc.1/by-name/persist     flags=display="Persist";backup=1
+/efs1           emmc    /dev/block/platform/msm_sdcc.1/by-name/modemst1    flags=backup=1;display=EFS
+/efs2           emmc    /dev/block/platform/msm_sdcc.1/by-name/modemst2    flags=backup=1;subpartitionof=/efs1
+/radio          emmc    /dev/block/platform/msm_sdcc.1/by-name/modem       flags=backup=1;display=Modem
+
+/external_sd    vfat    /dev/block/mmcblk1p1    /dev/block/mmcblk1    flags=display="Micro SD";storage;wipeingui;removable
+/usb-otg        auto    /dev/block/sda1         flags=display="USB-OTG";storage;wipeingui;removable

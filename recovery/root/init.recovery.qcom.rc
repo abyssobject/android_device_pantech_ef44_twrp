@@ -1,14 +1,5 @@
-# ef44 (MSM8960) recovery: both Krait cores up and an interactive governor,
-# as in the TWRP 3.7.0_9 image for this phone
-on boot
-    write /sys/module/msm_thermal/core_control/enabled 0
-    write /sys/devices/system/cpu/cpu1/online 1
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor interactive
-    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq 384000
-    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq 384000
-    write /sys/class/leds/lcd-backlight/brightness 160
-
+# ef44 (MSM8960) recovery. CPU setup is left to TWRP, which runs both
+# cores on the performance governor (this kernel has no "interactive").
 on init
     write /sys/class/android_usb/android0/iSerial ${ro.serialno}
     setprop sys.usb.configfs 0
